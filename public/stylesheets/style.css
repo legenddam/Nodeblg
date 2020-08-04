@@ -60,6 +60,8 @@ h1, h2, h3, p{
 .clr{
   clear : both;
 }
-a {
-  color: #00B7FF;
+
+.post a{
+  color:#666;
+  text-decoration: none;
 }

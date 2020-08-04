@@ -10,6 +10,7 @@ var moment = require('moment');
 var expressValidator = require('express-validator');
 
 var mongodb = require('mongodb');
+//const url = 'localhost:27017/nodeblog'; // Connection URL
 var db = require('monk')('localhost/nodeblog');
 var upload = multer({ dest: './uploads/' }) //Handule Uploads
 
