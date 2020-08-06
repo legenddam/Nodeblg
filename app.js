@@ -6,7 +6,6 @@ var logger = require('morgan');
 
 var session = require('express-session');
 var multer = require('multer');
-var moment = require('moment');
 var expressValidator = require('express-validator');
 
 var mongodb = require('mongodb');
@@ -15,7 +14,7 @@ var db = require('monk')('localhost/nodeblog');
 var upload = multer({ dest: './uploads/' }) //Handule Uploads
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var postsRouter = require('./routes/posts');
 
 var app = express();
 
@@ -35,7 +34,8 @@ app.use(session({
   saveUninitialized : true,
   resave : true
 }));
-
+//Implementing 
+app.locals.moment = require('moment');
 //Express Validator
 app.use(expressValidator({
   errorFormatter: function(param, msg, value) {
@@ -65,7 +65,7 @@ app.use(function(req, res, next){
   next();
 })
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/posts', postsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
