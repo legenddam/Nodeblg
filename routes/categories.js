@@ -9,6 +9,18 @@ router.get('/add', function(req, res, next) {
 
 });
 
+router.get('/show/:category', function(req, res, next) {
+    var db = req.db;
+    var posts = db.get('posts');
+    posts.find({category : req.params.category},{}, function(err, posts){
+      if(err){
+        console.log("MongoDB ERR");
+        return;
+      }
+      res.render('index', { posts: posts});
+    });
+});
+
 router.post('/add', function(req, res, next){
 
     var name = req.body.name;

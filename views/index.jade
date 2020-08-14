@@ -6,7 +6,9 @@ block content
         .post
             h1
               a(href='/posts/show/#{post._id}')= post.title
-            p.meta Posted in #{post.category} by #{post.author} on #{moment(post.date).format("MM-DD-YYYY")}   
+            p.meta Posted in 
+              a(href= '/categories/show/#{post.category}') #{post.category}
+              | by #{post.author} on #{moment(post.date).format("MM-DD-YYYY")}   
             img(src = '/images/#{post.mainimage}')
             != splitText(post.body, 300)
             a.more(href = '/posts/show/#{post._id}') ReadMore
