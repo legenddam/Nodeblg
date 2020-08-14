@@ -12,7 +12,7 @@ router.get('/add', function(req, res, next) {
     
     categories.find({}, {}, function(err, categories){
         if(err){
-            consolog.log("Category Database Error");
+            console.log("Category Database Error");
             return;
         }else{
             res.render('addposts', {title : "Add Posts", categories : categories});
@@ -26,8 +26,6 @@ router.post('/add', upload.single('mainimage'),function(req, res, next) {
     var body = req.body.body;
     var author = req.body.author;
     var date = new Date();
-
-    console.log(date);
 
     var db = req.db;
 
@@ -44,7 +42,16 @@ router.post('/add', upload.single('mainimage'),function(req, res, next) {
 
     var errors = req.validationErrors();
     if(errors){
-        res.render('addposts', {"errors": errors});
+        var categories = db.get('categories');
+        categories.find({}, {}, function(err, categories){
+            if(err){
+                console.log("Category Database Error");
+                return;
+            }
+            else{
+                res.render('addposts', {"errors": errors, "categories" : categories});
+            }
+        });
     }
     else{
         var posts = db.get('posts');
@@ -54,7 +61,7 @@ router.post('/add', upload.single('mainimage'),function(req, res, next) {
                     res.send(err);
                 }
                 else{
-                    req.flash("success", "The Poast Added");
+                    req.flash("success", "The Post Added");
                     res.location('/');
                     res.redirect('/');
                 }
