@@ -5,13 +5,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var session = require('express-session');
-var multer = require('multer');
 var expressValidator = require('express-validator');
 
 var mongodb = require('mongodb');
 //const url = 'localhost:27017/nodeblog'; // Connection URL
 var db = require('monk')('localhost/nodeblog');
-var upload = multer({ dest: './uploads/' }) //Handule Uploads
 
 var indexRouter = require('./routes/index');
 var postsRouter = require('./routes/posts');
@@ -36,6 +34,10 @@ app.use(session({
 }));
 //Implementing 
 app.locals.moment = require('moment');
+app.locals.splitText = function(text, length){
+  var subText = text.substring(0, length);
+  return subText;
+}
 //Express Validator
 app.use(expressValidator({
   errorFormatter: function(param, msg, value) {
