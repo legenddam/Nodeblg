@@ -8,7 +8,6 @@ var session = require('express-session');
 var expressValidator = require('express-validator');
 
 var mongodb = require('mongodb');
-//const url = 'localhost:27017/nodeblog'; // Connection URL
 var db = require('monk')('localhost/nodeblog');
 
 var indexRouter = require('./routes/index');
@@ -28,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Handle Sessions
 app.use(session({
+  
   secret : 'secret',
   saveUninitialized : true,
   resave : true

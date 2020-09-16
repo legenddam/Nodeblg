@@ -13,7 +13,6 @@ router.get('/', function(req, res, next) {
       console.log("MongoDB ERR");
       return;
     }
-
     res.render('index', { posts: posts});
   });
 });

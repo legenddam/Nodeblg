@@ -133,6 +133,7 @@ router.post('/addcomment', function(req, res, next) {
                     res.location('/posts/show/'+postid);
                     res.redirect('/posts/show/'+postid);
                 }
+                
             });
     }
 });
